@@ -2,6 +2,7 @@ package directoriocontactos;
 
 import java.io.*;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 public class Lista {
 
@@ -9,7 +10,7 @@ public class Lista {
 
     public void agregar(Nodo n) {
         //La lista esta vacia
-        if (cabeza != null) {
+        if (cabeza == null) {
             cabeza = n;
         } else {
             //Buscar el ultimo nodo de la lista
@@ -60,6 +61,25 @@ public class Lista {
     public void mostrar(JTable tbl) {
         //Crear matriz de datos para la rejilla a partir de la lista ligada
         String[][] datos = new String[obtenerLongitud()][5];
+
+        //Pasar los datos de la lista ligada a la matriz
+        Nodo sig = cabeza;
+        int f=0;
+        while (sig != null) {
+            datos[f][0]=sig.nombre;
+            datos[f][1]=sig.telefono;
+            datos[f][2]=sig.celular;
+            datos[f][3]=sig.direccion;
+            datos[f][4]=sig.correo;
+            f++;
+            sig = sig.siguiente;
+        }
+        //Crear los encabezados
+        String[] encabezados=new String[]{"Nombre", "Teléfono", "Móvil", "Dirección", "Correo"};
+        
+        DefaultTableModel dtm=new DefaultTableModel(datos, encabezados);
+        
+        tbl.setModel(dtm);
     }
 
 }

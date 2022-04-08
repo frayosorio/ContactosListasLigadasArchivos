@@ -6,17 +6,19 @@
 
 package directoriocontactos;
 
-/**
- *
- * @author User
- */
 public class FrmDirectorio extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FrmDirectorio
-     */
+    Lista l=new Lista();
+    
     public FrmDirectorio() {
         initComponents();
+        
+        //Abrir el archivo de datos
+        String nombreArchivo=System.getProperty("user.dir")+"/src/Datos/Datos.txt";
+        l.desdeArchivo(nombreArchivo);
+        
+        //Mostrar los datos en la rejilla de datos (JTABLE)
+        l.mostrar(tblContactos);
     }
 
     /**

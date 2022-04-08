@@ -1,15 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package directoriocontactos;
 
-/**
- *
- * @author User
- */
 public class Nodo {
     
     public String nombre;
@@ -23,8 +13,8 @@ public class Nodo {
     public void actualizar(String nombre,
                             String telefono,
                             String celular,
-                            String correo,
-                            String direccion){
+                            String direccion,
+                            String correo){
         this.nombre=nombre;
         this.telefono=telefono;
         this.celular=celular;
