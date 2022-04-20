@@ -2,6 +2,8 @@ package directoriocontactos;
 
 import java.io.*;
 import javax.swing.*;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
 public class Lista {
@@ -22,6 +24,30 @@ public class Lista {
             sig.siguiente = n;
         }
         n.siguiente = null;
+    }
+
+    //devuelve el nodo que se encuentre en una poisición
+    public Nodo obtenerNodo(int posicion) {
+        int p = 0;
+        Nodo apuntador = cabeza;
+        while (apuntador != null && p != posicion) {
+            apuntador = apuntador.siguiente;
+            p++;
+        }
+        return apuntador;
+    }
+
+    //cambiar los valores de un nodo, dada la posición
+    public void actualizar(int posicion,
+            String nombre,
+            String telefono,
+            String celular,
+            String direccion,
+            String correo) {
+        Nodo n = obtenerNodo(posicion);
+        if (n != null) {
+            n.actualizar(nombre, telefono, celular, direccion, correo);
+        }
     }
 
     public void desdeArchivo(String nombreArchivo) {
@@ -64,21 +90,38 @@ public class Lista {
 
         //Pasar los datos de la lista ligada a la matriz
         Nodo sig = cabeza;
-        int f=0;
+        int f = 0;
         while (sig != null) {
-            datos[f][0]=sig.nombre;
-            datos[f][1]=sig.telefono;
-            datos[f][2]=sig.celular;
-            datos[f][3]=sig.direccion;
-            datos[f][4]=sig.correo;
+            datos[f][0] = sig.nombre;
+            datos[f][1] = sig.telefono;
+            datos[f][2] = sig.celular;
+            datos[f][3] = sig.direccion;
+            datos[f][4] = sig.correo;
             f++;
             sig = sig.siguiente;
         }
         //Crear los encabezados
-        String[] encabezados=new String[]{"Nombre", "Teléfono", "Móvil", "Dirección", "Correo"};
-        
-        DefaultTableModel dtm=new DefaultTableModel(datos, encabezados);
-        
+        String[] encabezados = new String[]{"Nombre", "Teléfono", "Móvil", "Dirección", "Correo"};
+
+        DefaultTableModel dtm = new DefaultTableModel(datos, encabezados);
+
+        //programar evento cuando cambien los datos
+        dtm.addTableModelListener(new TableModelListener() {
+            
+            @Override
+            public void tableChanged(TableModelEvent e) {
+                int p = e.getFirstRow();
+                DefaultTableModel dtm=(DefaultTableModel)e.getSource();
+                actualizar(p,
+                        (String)dtm.getValueAt(p, 0),
+                        (String)dtm.getValueAt(p, 1),
+                        (String)dtm.getValueAt(p, 2),
+                        (String)dtm.getValueAt(p, 3),
+                        (String)dtm.getValueAt(p, 4)
+                        );
+            }
+        });
+
         tbl.setModel(dtm);
     }
 
