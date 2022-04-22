@@ -3,20 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package directoriocontactos;
 
 public class FrmDirectorio extends javax.swing.JFrame {
 
-    Lista l=new Lista();
-    
+    Lista l = new Lista();
+
     public FrmDirectorio() {
         initComponents();
-        
+
         //Abrir el archivo de datos
-        String nombreArchivo=System.getProperty("user.dir")+"/src/Datos/Datos.txt";
+        String nombreArchivo = System.getProperty("user.dir") + "/src/Datos/Datos.txt";
         l.desdeArchivo(nombreArchivo);
-        
+
         //Mostrar los datos en la rejilla de datos (JTABLE)
         l.mostrar(tblContactos);
     }
@@ -59,6 +58,11 @@ public class FrmDirectorio extends javax.swing.JFrame {
         btnEliminar.setFocusable(false);
         btnEliminar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnEliminar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnEliminar);
 
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Guardar.gif"))); // NOI18N
@@ -112,6 +116,15 @@ public class FrmDirectorio extends javax.swing.JFrame {
         //Mostrar los datos en la rejilla de datos (JTABLE)
         l.mostrar(tblContactos);
     }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        //Hay alguna fila seleccionada?
+        if (tblContactos.getSelectedRow() >= 0) {
+            l.eliminar(l.obtenerNodo(tblContactos.getSelectedRow()));
+            //Mostrar los datos en la rejilla de datos (JTABLE)
+            l.mostrar(tblContactos);
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
     /**
      * @param args the command line arguments

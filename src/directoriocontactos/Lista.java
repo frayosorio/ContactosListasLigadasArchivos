@@ -50,6 +50,36 @@ public class Lista {
         }
     }
 
+    //eliminar el nodo de la lista
+    public void eliminar(Nodo n) {
+        //si hay lista y nodo a eliminar
+        if (cabeza != null && n != null) {
+            //buscar el nodo
+            Nodo apuntador = cabeza;
+            Nodo anterior = null;
+            boolean encontrado = false;
+            while (apuntador != null && !encontrado) {
+                //se halló el nodo
+                if (apuntador == n) {
+                    encontrado = true;
+                } else {
+                    anterior = apuntador;
+                    apuntador = apuntador.siguiente;
+                }
+            }
+            //eliminar el nodo
+            if (encontrado) {
+                //eliminado la cabeza?
+                if (anterior == null) {
+                    cabeza = apuntador.siguiente;
+                } else {
+                    anterior.siguiente = apuntador.siguiente;
+                }
+                n = null;
+            }
+        }
+    }
+
     public void desdeArchivo(String nombreArchivo) {
         BufferedReader bf = Archivo.Abrir(nombreArchivo);
         try {
@@ -107,18 +137,18 @@ public class Lista {
 
         //programar evento cuando cambien los datos
         dtm.addTableModelListener(new TableModelListener() {
-            
+
             @Override
             public void tableChanged(TableModelEvent e) {
                 int p = e.getFirstRow();
-                DefaultTableModel dtm=(DefaultTableModel)e.getSource();
+                DefaultTableModel dtm = (DefaultTableModel) e.getSource();
                 actualizar(p,
-                        (String)dtm.getValueAt(p, 0),
-                        (String)dtm.getValueAt(p, 1),
-                        (String)dtm.getValueAt(p, 2),
-                        (String)dtm.getValueAt(p, 3),
-                        (String)dtm.getValueAt(p, 4)
-                        );
+                        (String) dtm.getValueAt(p, 0),
+                        (String) dtm.getValueAt(p, 1),
+                        (String) dtm.getValueAt(p, 2),
+                        (String) dtm.getValueAt(p, 3),
+                        (String) dtm.getValueAt(p, 4)
+                );
             }
         });
 
