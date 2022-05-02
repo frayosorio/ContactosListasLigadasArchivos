@@ -155,4 +155,27 @@ public class Lista {
         tbl.setModel(dtm);
     }
 
+    public boolean guardar(String nombreArchivo) {
+        int tn = obtenerLongitud();
+        if (tn > 0) {
+            //Convertir de lista ligada a vector de cadenas de texto
+            String[] lineas = new String[tn];
+            Nodo apuntador = cabeza;
+            int i = 0;
+            while (apuntador != null) {
+                lineas[i] = (apuntador.nombre != null ? apuntador.nombre : " ") + "\t"
+                        + (apuntador.telefono != null ? apuntador.telefono : " ") + "\t"
+                        + (apuntador.celular != null ? apuntador.celular : " ") + "\t"
+                        + (apuntador.direccion != null ? apuntador.direccion : " ") + "\t"
+                        + (apuntador.correo != null ? apuntador.correo : " ");
+                apuntador = apuntador.siguiente;
+                i++;
+            }
+
+            return Archivo.guardar(nombreArchivo, lineas);
+        } else {
+            return false;
+        }
+    }
+
 }

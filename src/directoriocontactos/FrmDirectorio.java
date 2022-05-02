@@ -5,6 +5,9 @@
  */
 package directoriocontactos;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 public class FrmDirectorio extends javax.swing.JFrame {
 
     Lista l = new Lista();
@@ -70,6 +73,11 @@ public class FrmDirectorio extends javax.swing.JFrame {
         btnGuardar.setFocusable(false);
         btnGuardar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnGuardar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnGuardar);
 
         btnOrdenar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/Ordenar.gif"))); // NOI18N
@@ -125,6 +133,15 @@ public class FrmDirectorio extends javax.swing.JFrame {
             l.mostrar(tblContactos);
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        String nombreArchivo = System.getProperty("user.dir") + "/src/Datos/Datos.txt";
+        if (l.guardar(nombreArchivo)) {
+            JOptionPane.showMessageDialog(new JFrame(), "Los datos fueron guardados");
+        } else {
+            JOptionPane.showMessageDialog(new JFrame(), "Los datos no pudieron ser guardados");
+        }
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**
      * @param args the command line arguments
