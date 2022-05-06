@@ -191,19 +191,10 @@ public class Lista {
 
     public void intercambiar(Nodo n1, Nodo n2, Nodo a1, Nodo a2) {
         if (n1 != null && n2 != null && cabeza != null && n1 != n2) {
-            //Nodo a1 = obtenerAntecesor(n1);
-            //Nodo a2 = obtenerAntecesor(n2);
-
-            /*
-             System.out.println((a1 != null ? a1.nombre : "*** | ")
-             + n1.nombre + " | "
-             + a2.nombre + " | "
-             + n2.nombre);
-             */
             if (a1 != null) {
                 a1.siguiente = n2;
             } else {
-                cabeza = n1;
+                cabeza = n2;
             }
 
             //Se guarda temporalmente el apuntador siguiente del segundo nodo
@@ -227,7 +218,7 @@ public class Lista {
             Nodo nj = ni.siguiente;
             while (nj != null) {
 
-                System.out.println(ni.nombre + " | " + nj.nombre);
+                //System.out.println(ni.nombre + " | " + nj.nombre);
 
                 if (ni.nombre.compareTo(nj.nombre) > 0) {
                     intercambiar(ni, nj, ai, aj);
