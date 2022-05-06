@@ -85,6 +85,11 @@ public class FrmDirectorio extends javax.swing.JFrame {
         btnOrdenar.setFocusable(false);
         btnOrdenar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnOrdenar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnOrdenar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOrdenarActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnOrdenar);
 
         tblContactos.setModel(new javax.swing.table.DefaultTableModel(
@@ -142,6 +147,11 @@ public class FrmDirectorio extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(new JFrame(), "Los datos no pudieron ser guardados");
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnOrdenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrdenarActionPerformed
+        l.ordenar();
+        l.mostrar(tblContactos);
+    }//GEN-LAST:event_btnOrdenarActionPerformed
 
     /**
      * @param args the command line arguments

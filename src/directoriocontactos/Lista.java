@@ -178,4 +178,69 @@ public class Lista {
         }
     }
 
+    public Nodo obtenerAntecesor(Nodo n) {
+        Nodo apuntador = null;
+        if (n != cabeza && cabeza != null) {
+            apuntador = cabeza;
+            while (apuntador != null && apuntador.siguiente != n) {
+                apuntador = apuntador.siguiente;
+            }
+        }
+        return apuntador;
+    }
+
+    public void intercambiar(Nodo n1, Nodo n2, Nodo a1, Nodo a2) {
+        if (n1 != null && n2 != null && cabeza != null && n1 != n2) {
+            //Nodo a1 = obtenerAntecesor(n1);
+            //Nodo a2 = obtenerAntecesor(n2);
+
+            /*
+             System.out.println((a1 != null ? a1.nombre : "*** | ")
+             + n1.nombre + " | "
+             + a2.nombre + " | "
+             + n2.nombre);
+             */
+            if (a1 != null) {
+                a1.siguiente = n2;
+            } else {
+                cabeza = n1;
+            }
+
+            //Se guarda temporalmente el apuntador siguiente del segundo nodo
+            Nodo t = n2.siguiente;
+            if (n1 != a2) {
+                n2.siguiente = n1.siguiente;
+                a2.siguiente = n1;
+            } else {
+                n2.siguiente = n1;
+            }
+            n1.siguiente = t;
+
+        }
+    }
+
+    public void ordenar() {
+        Nodo ni = cabeza;
+        Nodo ai = null;
+        while (ni.siguiente != null) {
+            Nodo aj = ni;
+            Nodo nj = ni.siguiente;
+            while (nj != null) {
+
+                System.out.println(ni.nombre + " | " + nj.nombre);
+
+                if (ni.nombre.compareTo(nj.nombre) > 0) {
+                    intercambiar(ni, nj, ai, aj);
+                    Nodo t = ni;
+                    ni = nj;
+                    nj = t;
+                }
+                aj = nj;
+                nj = nj.siguiente;
+            }
+            ai = ni;
+            ni = ni.siguiente;
+        }
+    }
+
 }
